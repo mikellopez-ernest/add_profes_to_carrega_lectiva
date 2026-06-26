@@ -1,0 +1,13 @@
+{
+  "name": "carrega-lectiva-profes",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "gas:pull": "clasp pull",
+    "gas:push": "clasp push",
+    "gas:open": "clasp open",
+    "gas:run": "clasp run syncProfessors",
+    "gas:logs": "clasp logs"
+  },
+  "devDependencies": {}
+}
