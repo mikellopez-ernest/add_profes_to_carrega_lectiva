@@ -7,6 +7,15 @@ const NAME_COLUMN_INDEX = 2;
 const FIRST_SURNAME_COLUMN_INDEX = 3;
 const SECOND_SURNAME_COLUMN_INDEX = 4;
 const FULL_NAME_COLUMN = 15;
+const MENU_NAME = 'Update';
+const MENU_SYNC_TEACHERS_ITEM = 'Teachers';
+
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu(MENU_NAME)
+    .addItem(MENU_SYNC_TEACHERS_ITEM, 'syncProfessors')
+    .addToUi();
+}
 
 function syncProfessors() {
   const sourceSpreadsheetId = getSourceSpreadsheetId_();

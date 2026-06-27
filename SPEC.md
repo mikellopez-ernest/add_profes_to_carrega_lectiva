@@ -17,6 +17,13 @@ inside the workspace spreadsheet named `Dades de professors`.
   The match is exact and case-sensitive.
 - The corresponding column B value is the source spreadsheet ID.
 
+## Spreadsheet Menu
+
+- When the bound spreadsheet is opened, the script adds a custom menu named
+  `Update`.
+- The `Update` menu contains an option named `Teachers`.
+- Choosing `Update > Teachers` calls `syncProfessors()`.
+
 ## Sync Flow
 
 1. Read the script property `Tables`.
@@ -62,6 +69,8 @@ The script should fail clearly when:
 
 ## Resolved Decisions
 
+- The spreadsheet menu is `Update`, with a `Teachers` option that runs
+  `syncProfessors()`.
 - The registry lookup is exact and case-sensitive.
 - The sync copies values only, not formulas.
 - The destination `professors` sheet is fully cleared before values are written.
