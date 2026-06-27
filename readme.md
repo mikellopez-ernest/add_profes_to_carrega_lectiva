@@ -60,3 +60,4 @@ Script project to be available as an API executable.
 - `appsscript.json`: Apps Script manifest.
 - `SPEC.md`: Functional specification.
 - `.clasp.json`: clasp project binding.
+# add_profes_to_carrega_lectiva

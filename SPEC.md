@@ -31,6 +31,8 @@ inside the workspace spreadsheet named `Dades de professors`.
 10. Clear the existing contents, formatting, validations, notes, and other sheet
     state from `professors`.
 11. Write the copied `Llista` values into `professors`, starting at cell A1.
+12. Fill column O in `professors` with the concatenated values from columns C,
+    D, and E for each copied row, joined with a single space.
 
 ## Expected Behavior
 
@@ -40,6 +42,10 @@ inside the workspace spreadsheet named `Dades de professors`.
 - Previous destination values outside the new copied range should be removed.
 - Existing destination formatting, notes, validations, filters, frozen rows, and
   other sheet state should be cleared before writing the copied values.
+- After the copied values are written, column O should contain the full professor
+  name built from columns C, D, and E.
+- Example: if column C is `Mikel`, column D is `López`, and column E is
+  `Villarroya`, column O should be `Mikel López Villarroya`.
 
 ## Error Cases
 
@@ -59,3 +65,5 @@ The script should fail clearly when:
 - The registry lookup is exact and case-sensitive.
 - The sync copies values only, not formulas.
 - The destination `professors` sheet is fully cleared before values are written.
+- Column O is generated after the value copy by joining columns C, D, and E with
+  a single space.

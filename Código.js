@@ -3,6 +3,10 @@ const TABLES_SHEET_NAME = 'tables';
 const SOURCE_SPREADSHEET_NAME = 'Dades de professors';
 const SOURCE_SHEET_NAME = 'Llista';
 const DESTINATION_SHEET_NAME = 'professors';
+const NAME_COLUMN_INDEX = 2;
+const FIRST_SURNAME_COLUMN_INDEX = 3;
+const SECOND_SURNAME_COLUMN_INDEX = 4;
+const FULL_NAME_COLUMN = 15;
 
 function syncProfessors() {
   const sourceSpreadsheetId = getSourceSpreadsheetId_();
@@ -31,13 +35,18 @@ function syncProfessors() {
     return;
   }
 
-  ensureSheetSize_(destinationSheet, values.length, values[0].length);
+  const fullNameValues = buildFullNameValues_(values);
+  ensureSheetSize_(destinationSheet, values.length, Math.max(values[0].length, FULL_NAME_COLUMN));
 
   destinationSheet
     .getRange(1, 1, values.length, values[0].length)
     .setValues(values);
 
-  console.log(`Copied ${values.length} rows from "${SOURCE_SHEET_NAME}" to "${DESTINATION_SHEET_NAME}".`);
+  destinationSheet
+    .getRange(1, FULL_NAME_COLUMN, fullNameValues.length, 1)
+    .setValues(fullNameValues);
+
+  console.log(`Copied ${values.length} rows from "${SOURCE_SHEET_NAME}" to "${DESTINATION_SHEET_NAME}" and generated column O.`);
 }
 
 function getSourceSpreadsheetId_() {
@@ -93,6 +102,21 @@ function readSheetValues_(sheet) {
   }
 
   return sheet.getRange(1, 1, lastRow, lastColumn).getValues();
+}
+
+function buildFullNameValues_(values) {
+  return values.map((row) => {
+    const fullName = [
+      row[NAME_COLUMN_INDEX],
+      row[FIRST_SURNAME_COLUMN_INDEX],
+      row[SECOND_SURNAME_COLUMN_INDEX],
+    ]
+      .filter((part) => part !== null && part !== undefined && part !== '')
+      .map((part) => String(part))
+      .join(' ');
+
+    return [fullName];
+  });
 }
 
 function clearSheet_(sheet) {
